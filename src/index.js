@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import "./index.css";
 
 const pizzaData = [
   {
@@ -48,15 +49,59 @@ const pizzaData = [
 
 function App() {
   return (
-    <div>
-      <h1>Hello React!</h1>
-      <Pizza />
+    <div className="container">
+      <Header />
+      <Menu />
+      <Footer />
     </div>
   );
 }
 
-function Pizza() {
-  return <h2>Pizza</h2>;
+function Pizza(props) {
+  return (
+    <div className="pizza">
+      <img src={props.image} alt="Spinaci Pizza" />
+      <h2>{props.name}</h2>
+      <p>{props.ingredients}</p>
+      <p>{props.price}</p>
+    </div>
+  );
+}
+
+function Header() {
+  return (
+    <header className="header">
+      <h1>Fast React Pizza Co.</h1>
+    </header>
+  );
+}
+
+function Menu() {
+  return (
+    <div className="Menu">
+      <h2>Our menu</h2>
+      <Pizza
+        name="Pizza Spinaci"
+        ingredients="Tomato, mozarella, spinach, and ricotta cheese"
+        price={12}
+        image="pizzas/spinaci.jpg"
+      />
+    </div>
+  );
+}
+
+function Footer() {
+  const hour = new Date().getHours();
+  console.log(hour);
+  const openHour = 12;
+  const closeHour = 22;
+  const isOpen = hour >= openHour && hour <= closeHour;
+  console.log(isOpen);
+  return (
+    <footer className="footer">
+      {new Date().toLocaleDateString()}."We're currently open")
+    </footer>
+  );
 }
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
